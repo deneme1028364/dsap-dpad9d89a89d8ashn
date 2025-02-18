@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Page</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@900&display=swap');
+        body {
+            background-color: black;
+            margin: 0;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            position: relative;
+        }
+        
+        .container {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+            opacity: 0;
+            animation: fadeIn 2s forwards;
+        }
+        
+        .title {
+            font-size: 40px;
+            color: white;
+            font-family: 'Orbitron', sans-serif;
+            text-transform: uppercase;
+            animation: glow 1.5s infinite alternate, wave 2s infinite;
+        }
+        
+        @keyframes glow {
+            0% {
+                text-shadow: 0 0 10px white, 0 0 20px yellow;
+            }
+            100% {
+                text-shadow: 0 0 20px white, 0 0 30px yellow;
+            }
+        }
+        
+        @keyframes wave {
+            0% {
+                transform: rotate(0deg);
+            }
+            50% {
+                transform: rotate(10deg);
+            }
+            100% {
+                transform: rotate(0deg);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .description {
+            color: white;
+            font-size: 18px;
+            margin-top: 10px;
+            animation: fadeIn 3s forwards;
+        }
+        
+        .icons {
+            margin-top: 20px;
+        }
+        
+        .icons a {
+            text-decoration: none;
+            display: inline-block;
+            margin: 0 10px;
+        }
+        
+        .icons img {
+            width: 40px;
+            filter: brightness(1.5);
+            transition: transform 0.3s;
+        }
+        
+        .icons img:hover {
+            transform: scale(1.2);
+        }
+
+        .snowflake {
+            position: absolute;
+            color: white;
+            font-size: 10px;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            from { transform: translateY(-100vh); }
+            to { transform: translateY(100vh); }
+        }
+
+        /* Particle.js effect styles */
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            background-color: white;
+            opacity: 0.5;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="title">vodka_noxrate</div>
+        <div class="description">Cyber security and ethical hacker software and computer engineer</div>
+        <div class="icons">
+            <a href="https://t.me/noxratehacking" target="_blank"><img src="telegram-icon.png" alt="Telegram"></a>
+            <img src="discord-icon.png" alt="Discord">
+            <img src="globe-icon.png" alt="Website">
+            <a href="https://t.me/noxratehacking" target="_blank"><img src="telegram-icon.png" alt="Telegram"></a>
+        </div>
+    </div>
+
+    <!-- Background music and control -->
+    <audio id="background-music" loop autoplay>
+        <source src="https://raw.githubusercontent.com/deneme1028364/dsap-dpad9d89a89d8ashn/branch_name/assets/background-music.mp3" type="audio/mp3">
+        Your browser does not support the audio element.
+    </audio>
+    <button id="music-control" style="position: absolute; bottom: 20px; left: 20px; color: white;">Toggle Music</button>
+
+    <script>
+        function createSnowflake() {
+            const snowflake = document.createElement("div");
+            snowflake.innerHTML = "❄";
+            snowflake.classList.add("snowflake");
+            snowflake.style.left = Math.random() * 100 + "vw";
+            snowflake.style.fontSize = (Math.random() * 10 + 5) + "px";
+            snowflake.style.animationDuration = (Math.random() * 3 + 2) + "s";
+            document.body.appendChild(snowflake);
+            setTimeout(() => { snowflake.remove(); }, 5000);
+        }
+        
+        function createParticle() {
+            const particle = document.createElement("div");
+            particle.classList.add("particle");
+            const size = Math.random() * 5 + 2;
+            particle.style.width = ${size}px;
+            particle.style.height = ${size}px;
+            particle.style.top = Math.random() * window.innerHeight + "px";
+            particle.style.left = Math.random() * window.innerWidth + "px";
+            document.body.appendChild(particle);
+            setTimeout(() => {
+                particle.style.transform = translate(${Math.random() * 200 - 100}px, ${Math.random() * 200 - 100}px);
+                particle.style.opacity = "0";
+                setTimeout(() => { particle.remove(); }, 2000);
+            }, 10);
+        }
+
+        setInterval(createSnowflake, 200);
+        setInterval(createParticle, 50);
+
+        // Music Control
+        const musicControlButton = document.getElementById('music-control');
+        const backgroundMusic = document.getElementById('background-music');
+
+        musicControlButton.addEventListener('click', () => {
+            if (backgroundMusic.paused) {
+                backgroundMusic.play();
+                musicControlButton.textContent = "Pause Music";
+            } else {
+                backgroundMusic.pause();
+                musicControlButton.textContent = "Play Music";
+            }
+        });
+    </script>
+</body>
+</html>
